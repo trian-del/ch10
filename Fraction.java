@@ -14,9 +14,9 @@ public class Fraction {
     }
 
     public Fraction(int n, int d) {
-        checkzero();
         numerator = n;
         denominator = d;
+        checkzero();
     }
 
     public Fraction(String f) {
@@ -29,6 +29,13 @@ public class Fraction {
     public Fraction(Fraction f) {
 		numerator = f.getNum();
 		denominator = f.getDenom();
+	}
+	
+	public static Fraction mult(Fraction a, Fraction b) {
+		int nr = a.getNum() * b.getNum();
+		int dr = a.getDenom() * b.getDenom();
+		
+		return new Fraction(nr, dr);
 	}
 
     public int getNum() {
