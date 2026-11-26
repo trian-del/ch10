@@ -37,6 +37,16 @@ public class Fraction {
 
         return new Fraction(nr, dr);
     }
+    
+    public static Fraction add(Fraction a, Fraction b) {
+		int A = a.getDenom();
+		int B = b.getDenom();
+		Fraction r = new Fraction(a.getNum()*B + b.getNum()*A, a.getDenom()*B + b.getDenom()*A);
+		r.reduce();
+		return r;
+		
+		
+	}
 
     public int GCF() {
 		int inum = numerator;
