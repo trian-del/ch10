@@ -3,8 +3,7 @@ public class Fraction {
 
     private void checkzero() {
         if (denominator == 0) {
-            System.out.println("Error: Denominator cannot be zero");
-            System.exit(0);
+            denominator = 1;
         }
     }
 
@@ -34,23 +33,44 @@ public class Fraction {
     public static Fraction mult(Fraction a, Fraction b) {
         int nr = a.getNum() * b.getNum();
         int dr = a.getDenom() * b.getDenom();
-
-        return new Fraction(nr, dr);
+		Fraction r = new Fraction(nr,dr);
+		r.reduce();
+        return r;
     }
+    
+    public static Fraction div(Fraction a, Fraction b) {
+		int nr = a.getNum() * b.getDenom();
+        int dr = a.getDenom() * b.getNum();
+		Fraction r = new Fraction(nr,dr);
+		r.reduce();
+        return r;
+	}
+		
     
     public static Fraction add(Fraction a, Fraction b) {
 		int A = a.getDenom();
 		int B = b.getDenom();
-		Fraction r = new Fraction(a.getNum()*B + b.getNum()*A, a.getDenom()*B + b.getDenom()*A);
+		Fraction r = new Fraction(a.getNum()*B + b.getNum()*A, a.getDenom()*B);
 		r.reduce();
 		return r;
-		
-		
+	}
+	
+	public static Fraction sub(Fraction a, Fraction b) {
+		int A = a.getDenom();
+		int B = b.getDenom();
+		Fraction r = new Fraction(a.getNum()*B - b.getNum()*A, a.getDenom()*B);
+		r.reduce();
+		return r;
 	}
 
     public int GCF() {
+		boolean negativeFlag = false;
 		int inum = numerator;
 		int idenom = denominator;
+		if (inum<0) {
+			negativeFlag = true;
+			inum = Math.abs(inum);
+		}
         while (inum != idenom) {
             while (inum > idenom) {
                 inum -= idenom;
